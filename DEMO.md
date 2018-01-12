@@ -135,4 +135,4 @@ func SyrupPancakes(ctx context.Context, cakes []breakfast.Pancake) <-chan breakf
 
 What we have done here is nearly identical to what was done in `ServerBreakfast` with the `opentracing.ContextWithSpan()` call.  But instead, we associate a *LogEvent* with a context.
 
-When the go-routine completes, `MaybeFinishEvent` will complete the LogEvent we associated with the context earlier. This is a good way to add event logging when the event spans multiple methods.
+When the go-routine completes, `MaybeFinishEvent` will complete the LogEvent we associated with the context earlier.
