@@ -1,6 +1,6 @@
 # Adding Tracing to your code with go-log
 
-[go-log](https://github.com/ipfs/go-log) is the logging library used by go-ipfs, it currently uses a modified version of [go-logging](https://github.com/whyrusleeping/go-logging) to implement the standard printf-style log output. In addition to standard logging output, go-log has the capability to produce [event logs](https://en.wikipedia.org/wiki/Log_file#Event_logs), which in turn can be used to generate tracing data via the [OpenTracing API](open tracing.io). 
+[go-log](https://github.com/ipfs/go-log) is the logging library used by go-ipfs, it currently uses a modified version of [go-logging](https://github.com/whyrusleeping/go-logging) to implement the standard printf-style log output. In addition to standard logging output, go-log has the capability to produce [event logs](https://en.wikipedia.org/wiki/Log_file#Event_logs), which in turn can be used to generate tracing data via the [OpenTracing API](https://github.com/opentracing/opentracing-go). 
 
 Here we will show how to instrument some example code with the `go-log`, package such that it can produce useful tracing data. If you are unfamilair with OpenTracing check out [these notes](https://github.com/ipfs/notes/issues/277), otherwise lets get started!
 
