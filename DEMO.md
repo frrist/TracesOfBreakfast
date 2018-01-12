@@ -144,5 +144,3 @@ func syrupPancakes(ctx context.Context, cakes []breakfast.Pancake) <-chan breakf
 ```
 
 When the go-routine completes, `MaybeFinishEvent` will complete the LogEvent we associated with the context earlier. This is a good way to add event logging when the event spans multiple methods.
-
-If you would like to try this demo out on your own checkout the [TracesOfBreakfast package](github.com/frrist/TracesOfBreakfast). There you find the complete version of this demo, and instructions on running it.
