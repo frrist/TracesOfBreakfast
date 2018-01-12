@@ -16,21 +16,16 @@ import (
 var log = logging.Logger("breakfast")
 
 func main() {
-	fmt.Printf("Start Jaeger by running: \n\n")
-	fmt.Printf(`docker run -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 -p5775:5775/udp -p6831:6831/udp -p6832:6832/udp \
-	-p5778:5778 -p16686:16686 -p14268:14268 -p9411:9411 jaegertracing/all-in-one:latest`)
-	fmt.Printf("\n\nThen visit 'localhost:16686' in your web-browser\n\n")
-
-	time.Sleep(5 * time.Second)
-	fmt.Printf("Making Breakfast!\n")
+	fmt.Printf("Starting Jaeger...\n")
 
 	tracer, err := InitTracer()
-	opentracing.SetGlobalTracer(tracer)
-
 	if err != nil {
-		fmt.Printf("Tracer Init Error %s\n", err)
+		fmt.Printf("Couldn't init Jaeger Tracer: %s\n", err)
 		return
 	}
+	opentracing.SetGlobalTracer(tracer)
+
+	fmt.Printf("Making Breakfast...\n")
 	for {
 		if err := ServeBreakfast(); err != nil {
 			fmt.Printf("Breakfast is ruined! %s\n", err)
@@ -136,7 +131,7 @@ func EatPancakes(<-chan breakfast.Pancake) {
 	return
 }
 
-//Initalize a Jaeger tracer and set it as the global tracer in opentracing api
+//Initalize a Jaeger tracer with constant sampling
 func InitTracer() (opentracing.Tracer, error) {
 	tracerCfg := &config.Configuration{
 		Sampler: &config.SamplerConfig{
