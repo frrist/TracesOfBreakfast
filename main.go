@@ -90,10 +90,6 @@ func FlipPancakes(ctx context.Context, cakes []breakfast.Pancake) (err error) {
 func SyrupPancakes(ctx context.Context, cakes []breakfast.Pancake) <-chan breakfast.Pancake {
 	// Create a new ctx that holds a reference to a log event in progress
 	ctx = log.EventBeginInContext(ctx, "PancakeReady")
-	return syrupPancakes(ctx, cakes)
-}
-
-func syrupPancakes(ctx context.Context, cakes []breakfast.Pancake) <-chan breakfast.Pancake {
 	// The channel perfectly syruped pancakes will be written to
 	out := make(chan breakfast.Pancake)
 	go func() {

@@ -99,16 +99,7 @@ But what if we have a function that spins off a go-routine and writes the result
 func SyrupPancakes(ctx context.Context, cakes []breakfast.Pancake) <-chan breakfast.Pancake {
         // Create a new ctx that holds a reference to a log event in progress
         ctx = log.EventBeginInContext(ctx, "SyrupPancakes")
-        return syrupPancakes(ctx, cakes)
-}
-```
-
-What we have done here is nearly identical to what was done in `ServerBreakfast` with the `opentracing.ContextWithSpan()` call.  But instead, we associate a *LogEvent* with a context. 
-
-Now, let's see how we go about completing the `SyrupPancakes` event.
-
-```go
-func syrupPancakes(ctx context.Context, cakes []breakfast.Pancake) <-chan breakfast.Pancake {
+  
         // The channel perfectly syruped pancakes will be added to
         out := make(chan breakfast.Pancake)
         go func() {
@@ -138,9 +129,10 @@ func syrupPancakes(ctx context.Context, cakes []breakfast.Pancake) <-chan breakf
                         }
                 }
         }()
-
         return out
 }
 ```
+
+What we have done here is nearly identical to what was done in `ServerBreakfast` with the `opentracing.ContextWithSpan()` call.  But instead, we associate a *LogEvent* with a context.
 
 When the go-routine completes, `MaybeFinishEvent` will complete the LogEvent we associated with the context earlier. This is a good way to add event logging when the event spans multiple methods.
